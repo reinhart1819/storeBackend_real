@@ -20,5 +20,10 @@ win:
 
 
 
+start server
+    py server.py    
+
+
+
 # install flask
 python -m pip install flask

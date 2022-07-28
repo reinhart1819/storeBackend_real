@@ -1,5 +1,5 @@
-from itertools import product
-from flask import Flask
+from random import randrange
+from flask import Flask, request
 from about import me
 import json
 from data import mock_data
@@ -40,6 +40,17 @@ def about_json():
 @app.get("/api/products")
 def get_products(): 
     return json.dumps(mock_data) 
+
+
+
+@app.post("/api/products")
+def save_products():
+    product = request.get_json()  
+    
+    mock_data.append(product)
+    product["id"] = randrange(1, 1000000000)
+
+    return json.dumps(product) 
 
 
 @app.get("/api/products/<id>")
@@ -84,5 +95,29 @@ def get_categories():
 
 
 
-app.run(debug=True)
 
+@app.get("/api/count_products")
+def get_product_count():
+    count = len(mock_data)
+
+    return json.dumps({"count": count})
+
+
+
+
+
+
+@app.get("/api/search/<text>")
+def get_title_text(text):
+    result = []
+    text = text.lower()
+    for product in mock_data:
+        if text in product["title"].lower():
+            result.append(product)
+
+
+    return json.dumps(result)
+
+
+
+app.run(debug=True)    
