@@ -6,8 +6,10 @@ import json
 from data import mock_data
 from config import db
 from bson import ObjectId
+from flask_cors import CORS
 
 app = Flask ("server")
+CORS(app)
 
 @app.get("/")
 def home():
