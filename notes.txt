@@ -27,3 +27,6 @@ start server
 
 # install flask
 python -m pip install flask
+
+reinhart1819
+school3818919    mongo info
